@@ -1,43 +1,44 @@
+// function mergeSort(array) {
+//   if (array.length <= 1) return array;
+
+//   const middle = Math.floor(array.length / 2);
+//   const left = array.slice(0, middle);
+//   const right = array.slice(middle);
+
+//   return merge(mergeSort(left), mergeSort(right));
+// }
+
+// function merge(left, right) {
+//   const array = [];
+
+//   while (left.length && right.length) {
+//     if (left[0] < right[0]) {
+//       array.push(left.shift());
+//     } else {
+//       array.push(right.shift());
+//     }
+//   }
+
+//   return array.concat(left.slice()).concat(right.slice());
+// }
 function mergeSort(array) {
   if (array.length <= 1) return array;
 
   const middle = Math.floor(array.length / 2);
-  const left = array.slice(0, middle);
-  const right = array.slice(middle);
+  const left = mergeSort(array.slice(0, middle));
+  const right = mergeSort(array.slice(middle));
 
-  return merge(mergeSort(left), mergeSort(right));
-}
+  const result = [];
 
-function merge(left, right) {
-  const array = [];
-
-  // // my idea, negligibly faster?
-  // const length = left.length < right.length ? left.length : right.length;
-
-  // for (let i = 0; i <= length - 1; i++) {
-  //   if (left[i] < right[i]) {
-  //     array.push(left[i]);
-  //     array.push(right[i]);
-  //   } else {
-  //     array.push(right[i]);
-  //     array.push(left[i]);
-  //   }
-  // }
-  // if (right.length > length) {
-  //   array.push(right[right.length - 1]);
-  // }
-  // return array;
-
-  // 1.679 seconds, online example
   while (left.length && right.length) {
     if (left[0] < right[0]) {
-      array.push(left.shift());
+      result.push(left.shift());
     } else {
-      array.push(right.shift());
+      result.push(right.shift());
     }
   }
 
-  return array.concat(left.slice()).concat(right.slice());
+  return result.concat(left.slice()).concat(right.slice());
 }
 
 const dumbArray = [
@@ -47,4 +48,4 @@ const dumbArray = [
 ];
 
 const array = [5, 23, 9, 2, 11];
-console.log(mergeSort(array));
+console.log(mergeSort(dumbArray));

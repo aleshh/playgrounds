@@ -21,6 +21,9 @@ function quickSort(arr, left, right) {
     arr[right] = tmp;
   }
 
+  console.log(left, right);
+
+  return [...quickSort(arr, 0, left), ...quickSort(arr, left + 2, right)];
   return arr;
 }
 
